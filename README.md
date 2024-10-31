@@ -5,7 +5,7 @@ Vitajte na našom školskom GitHube! Možno sa vám zdá, že táto stránka je 
 ## 🧑‍💻 Na čo nám slúži GitHub?
 GitHub nám umožňuje jednoducho nahrávať náš kód, aby si ho mohli pozrieť alebo stiahnuť aj ostatní. Väčšinou to som ja, kto sem nahráva kód, ale možno to využijete aj vy! 🙌
 
-##📌 Pre tých, čo sa nechcú trápiť programovaním...
+## 📌 Pre tých, čo sa nechcú trápiť programovaním...
 Priznávam, že väčšina z vás pravdepodobne nemá záujem sa hlbšie ponoriť do programovania (ani ja som to tak necítil – preto už nie som na IT škole 😄).
 
 Takže... po hodinách tu vždy nájdete správne riešenia. Môžete si tak jednoducho porovnať svoj kód a zistiť, kde ste urobili chyby.
