@@ -1,23 +1,21 @@
 # Napíšte program, ktorý získa od používateľa dve čísla v rozsahu 1 až 9 (iné nedovolí) a následne s nimi vykoná výpočty: 
 # sčítanie (A+B), odčítanie (A-B), násobenie (A×B), delenie (A:B) a umocnenie (A^B).  
 
-print("Zadajte 2 cele cisla medzi 1 az 9: ")
-while True:
-    num1 = int(input())
-    if 1 <= num1 <= 9:
-        break
-    else:
-        print("Nespravne cislo! Prosim zadajte cislo medzi 1 a 9")
+def get_number():
+    while True:
+        num = int(input())
+        if 1 <= num <= 9:
+            return num
+        else:
+            print("Nespravne cislo! Prosim zadajte cislo medzi 1 a 9")
 
-while True:
-    num2 = int(input())
-    if 1 <= num2 <= 9:
-        break
-    else:
-        print("Nespravne cislo! Prosim zadajte cislo medzi 1 a 9")
+print("Prosim zadajte 2 cele cisla medzi 1 az 9: ")
+num1 = get_number()
+num2 = get_number()
 
-print("Sucet cisel: ", num1+num2)
-print("Rozdiel cisel: ", num1-num2)
-print("Sucin cisel: ", num1*num2)
-print("Podiel cisel: ", num1/num2)
+
+print("Sucet: ", num1+num2)
+print("Rozdiel: ", num1-num2)
+print("Sucin: ", num1*num2)
+print("Podiel: ", num1/num2)
 print("Umocnenie: ", pow(num1,num2))
