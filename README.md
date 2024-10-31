@@ -1,4 +1,5 @@
-# 👋 Wasgood neprogramáti, som Tomáš (ex ITčkár spolužiak)!
+# 👋 Wasgood neprogramáti, 
+### som Tomáš (ex ITčkár spolužiak)!
 Vitajte na našom školskom GitHube! Možno sa vám zdá, že táto stránka je trochu zložitá a neprehľadná – presne tak som to cítil aj ja, keď som začínal programovať. 😊
 
 ## 🧑‍💻 Na čo nám slúži GitHub?
