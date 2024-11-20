@@ -1,120 +1,210 @@
-house = [None, None, None, None, None]
-colors_set = ["zlta", "modra", "cervena", "zelena", "biela"]
-nationalities_set = ["Brit", "Sved", "Dan", "Nemec", "Nor"]
-drinks_set = ["caj", "kava", "mlieko", "pivo", "voda"]
-cigars_set = ["Pall Mall", "Dunhill", "Blend", "Blue Master", "Prince"]
-animal_set = ["pes", "vtak", "macka", "ryba", "kon"]
+'''
+Brit žije v červenom dome.
+Švéd chová psy.
+Dán pije čaj.
+Zelený dom je hneď naľavo od bieleho.
+Obyvateľ zeleného domu pije kávu.
+Ten, kto fajčí cigarety Pall Mall, chová vtáky.
+Obyvateľ žltého domu fajčí cigarety Dunhill.
+Ten, kto žije v prostrednom dome, pije mlieko.
+Nór žije v prvom dome.
+Ten, kto fajčí cigarety Blends, žije vedľa chovateľa mačiek.
+Chovateľ koní žije vedľa toho, kto fajčí cigarety Dunhill.
+Ten, kto fajčí cigarety Blue Master, pije pivo.
+Nemec fajčí cigarety Prince.
+Nór žije vedľa modrého domu.
+Sused toho, kto fajčí cigarety Blends, pije vodu.
+'''
 
-for i in range(len(house)):
-    house[i] = {
-        "farba" : colors_set[:],
-        "narodnost" : nationalities_set[:],
-        "napoj" : drinks_set[:],
-        "cigareta" : cigars_set[:],
-        "zviera" : animal_set[:]
-    }
+COLORS = ['Cervena', 'Zelena', 'Biela', 'Zlta', 'Modra']
+NATIONALITIES = ['Brit', 'Sved', 'Dan', 'Nor', 'Nemec']
+DRINKS = ['Caj', 'Kava', 'Mlieko', 'Pivo', 'Voda']
+CIGARS = ['Pall Mall', 'Dunhill', 'Blends', 'Blue Master', 'Prince']
+PETS = ['Pes', 'Vtak', 'Macka', 'Kon', 'Ryba']
 
-#1 Brit žije v červenom dome.
-for i in range(5):
-    if "Brit" not in house[i]["narodnost"]:
-        house[i]["farba"] = [x for x in house[i]["farba"] if x != "cervena"]  
-    if "cervena" not in house[i]["farba"]:
-        house[i]["narodnost"] = [x for x in house[i]["narodnost"] if x != "Brit"] 
+houses = [{'farba': '', 'narodnost': '', 'napoj': '', 'zviera': '', 'cigara': ''} for _ in range(5)]
 
-#2 Sved ma psa.
-for i in range(5):
-    if "Sved" not in house[i]["narodnost"]:
-        house[i]["zviera"] = [x for x in house[i]["zviera"] if x != "pes"]
-    if "pes" not in house[i]["zviera"]:
-        house[i]["narodnost"] = [x for x in house[i]["narodnost"] if x != "Sved"]
+#1 Nór žije v prvom dome.
+houses[0]['narodnost'] = NATIONALITIES[4]
 
-#3 Dan pije caj.
-for i in range(5):
-    if "Dan" not in house[i]["narodnost"]:
-        house[i]["napoj"] = [x for x in house[i]["napoj"] if x != "caj"]
-    if "caj" not in house[i]["zviera"]:
-        house[i]["narodnost"] = [x for x in house[i]["narodnost"] if x != "Dan"]
+#2 Nór žije vedľa modrého domu.
+for i, house in enumerate(houses):
+    if house['narodnost'] != NATIONALITIES[4]:
+        continue
 
-#4 Zelený dom je hneď vľavo vedľa bieleho domu.
-for i in range(4):  
+    if i == 0:
+        # If Nor lives in the first house, the second house is Modry
+        houses[i + 1]['farba'] = COLORS[4]
+        break
+
+    if i == 4:
+        # If Nor lives in the fifth house, the fourth house is Modry
+        houses[i - 1]['farba'] = COLORS[4]
+        break
+
+    if houses[i + 1]['farba'] == '' and houses[i - 1]['farba'] != '':
+        # If the house to the right is empty and the one to the left isn't, the right house is Modry
+        houses[i + 1]['farba'] = COLORS[4]
+        break
+
+    if houses[i + 1]['farba'] != '' and houses[i - 1]['farba'] == '':
+        # If the house to the right isn't empty and the one to the left is, the left house is Modry
+        houses[i - 1]['farba'] = COLORS[4]
+        break
+
+#3 Ten, kto žije v prostrednom dome, pije mlieko.
+houses[2]['napoj'] = DRINKS[2] # Mlieko
+
+#4 Zelený dom je hneď naľavo od bieleho.    #5 Obyvateľ zeleného domu pije kávu.
+for i in range(len(houses)):  
+    # Check if houses i and i+1 have empty COLORS and if the Green house has empty or Kava for drink
+    if (
+        i < len(houses) - 1 and  # Check if last item in loop
+        houses[i]['farba'] == '' and    
+        houses[i+1]['farba'] == '' and 
+        (houses[i]['napoj'] == '' or houses[i]['napoj'] == DRINKS[1])
+    ):
+        houses[i]['farba'] = COLORS[1] # Zelena
+        houses[i+1]['farba'] = COLORS[2] # Biela
+        break
+
+
+#6 Brit žije v červenom dome.
+for i in range(len(houses)): 
+    if houses[i]['farba'] == '' and houses[i]['narodnost'] == '': # Finds the firt house where Color and Nationality is empty
+        houses[i]['farba'] == COLORS[0]                           # If so, fills in Red and Brit
+        houses[i]['narodnost'] == NATIONALITIES[0]
+        break
+    if houses[i]['farba'] == '' and houses[i]['narodnost'] != '': # Finds last house without Color
+        houses[i]['farba'] = COLORS[3] # Fills in Yellow
+        break
+
+#7 Obyvateľ žltého domu fajčí cigarety Dunhill.
+for i in range(len(houses)): 
+    if houses[i]['farba'] == COLORS[3]: 
+        houses[i]['cigara'] = CIGARS[1] # Dunhill
+        break
+
+#8 Osoba, ktorá má koňa, býva vedľa osoby, ktorá fajčí Dunhill
+for i, house in enumerate(houses):
+    if house['cigara'] != CIGARS[1]:
+        continue
+
+    if i == 0:
+        # If Nor lives in the first house, the second house is Modry
+        houses[i + 1]['zviera'] = PETS[3]
+        break
+
+    if i == 4:
+        # If Nor lives in the fifth house, the fourth house has Kon
+        houses[i - 1]['zviera'] = PETS[3]
+        break
+
+    if houses[i + 1]['zviera'] == '' and houses[i - 1]['zviera'] != '':
+        # If the house to the right is empty and the one to the left isn't, the right house is Modry
+        houses[i + 1]['zviera'] = PETS[3]
+        break
+
+    if houses[i + 1]['zviera'] != '' and houses[i - 1]['zviera'] == '':
+        # If the house to the right isn't empty and the one to the left is, the left house is Modry
+        houses[i - 1]['zviera'] = PETS[3]
+        break
+
+#9 Dán pije čaj.    #10 Ten, kto fajčí cigarety Blue Master, pije pivo.
+for i in range(len(houses)):
+    # Find house where there's no Blend smoker and not Dan
+    if (
+        (houses[i]['cigara'] != CIGARS[3] and houses[i]['cigara'] != '')
+        and (houses[i]['narodnost'] != NATIONALITIES[2] and houses[i]['narodnost'] != '')
+    ):
+        houses[i]['napoj'] = DRINKS[4]
+        break
     
-    if 'zelena' in house[i]['farba'] and 'biela' in house[i + 1]['farba']:
-        house[i]['farba'] = ['zelena']  
-        house[i + 1]['farba'] = ['biela']  
+#11 Osoba, ktorá fajčí Blend, má suseda, ktorý pije vodu.
+for i, house in enumerate(houses):
+    if house['napoj'] != DRINKS[4]:
+        continue
 
-#5 Majiteľ zeleného domu pije kávu
-for i in range(5):
-    if "zelena" not in house[i]["farba"]:
-        house[i]["napoj"] = [x for x in house[i]["napoj"] if x != "kava"]
-    if "kava" not in house[i]["napoj"]:
-        house[i]["farba"] = [x for x in house[i]["farba"] if x != "zelena"]
+    if i == 0:
+        # If Nor lives in the first house, the second house is Modry
+        houses[i + 1]['cigara'] = CIGARS[2]
+        break
 
-#6 Osoba, ktorá fajčí Pall Mall, má vtáka.
-for i in range(5):
-    if "Pall Mall" not in house[i]["cigareta"]:
-        house[i]["zviera"] = [x for x in house[i]["zviera"] if x != "vtak"]
-    if "vtak" not in house[i]["zviera"]:
-        house[i]["cigareta"] = [x for x in house[i]["cigareta"] if x != "Pall Mall"]
+    if i == 4:
+        # If Nor lives in the fifth house, the fourth house has Kon
+        houses[i - 1]['cigara'] = CIGARS[2]
+        break
 
-#7 Majiteľ žltého domu fajčí Dunhill.
-for i in range(5):
-    if "zlta" not in house[i]["farba"]:
-        house[i]["cigareta"] = [x for x in house[i]["cigareta"] if x != "Dunhill"]
-    if "Dunhill" not in house[i]["cigareta"]:
-        house[i]["farba"] = [x for x in house[i]["farba"] if x != "zlta"]
+    if houses[i + 1]['zviera'] == '' and houses[i - 1]['zviera'] != '':
+        # If the house to the right is empty and the one to the left isn't, the right house is Modry
+        houses[i + 1]['cigara'] = CIGARS[2]
+        break
 
-#8 Osoba žijúca v strednom dome pije mlieko.
-house[2]["napoj"] = ["mlieko"]
-
-#9 Nór býva v prvom dome.
-house[0]["narodnost"] = ["Nor"]
-
-#10 Osoba, ktorá fajčí Blend, býva vedľa osoby, ktorá má mačku.
-for i in range(4):
-    if "Blend" in house[i]["cigareta"]:
-        house[i+1]["zviera"] = [x for x in house[i+1]["zviera"] if x != "macka"]
-    if "macka" in house[i]["zviera"]:
-        house[i+1]["cigareta"] = [x for x in house[i+1]["cigareta"] if x != "Blend"]
-
-#11 Osoba, ktorá má koňa, býva vedľa osoby, ktorá fajčí Dunhill.
-for i in range(4):
-    if "kon" in house[i]["zviera"]:
-        house[i+1]["cigareta"] = [x for x in house[i+1]["cigareta"] if x != "Dunhill"]
-    if "Dunhill" in house[i]["cigareta"]:
-        house[i+1]["zviera"] = [x for x in house[i+1]["zviera"] if x != "kon"]
-
+    if houses[i + 1]['zviera'] != '' and houses[i - 1]['zviera'] == '':
+        # If the house to the right isn't empty and the one to the left is, the left house is Modry
+        houses[i - 1]['cigara'] = CIGARS[2]
+        break
+    
 #12 Osoba, ktorá fajčí Blue Master, pije pivo.
-for i in range(5):
-    if "Blue Master" not in house[i]["cigareta"]:
-        house[i]["napoj"] = [x for x in house[i]["napoj"] if x != "pivo"]
-    if "pivo" not in house[i]["napoj"]:
-        house[i]["cigareta"] = [x for x in house[i]["cigareta"] if x != "Blue Master"]
+for i in range(len(houses)): # Find the one house without CIGARS and DRINKS
+    if houses[i]['napoj'] == '' and houses[i]['cigara'] == '':
+        houses[i]['cigara'] = CIGARS[3] # Assign Blue Master and Pivo
+        houses[i]['napoj'] = DRINKS[3]
+        break
 
-#13 Nemec fajčí Prince.
-for i in range(5):
-    if "Nemec" not in house[i]["narodnost"]:
-        house[i]["cigareta"] = [x for x in house[i]["cigareta"] if x != "Prince"]
-    if "Prince" not in house[i]["cigareta"]:
-        house[i]["narodnost"] = [x for x in house[i]["narodnost"] if x != "Nemec"]
+#13 Dán pije čaj.
+for i in range(len(houses)): # Find house with no NATIONALITIES and DRINKS
+    if houses[i]['napoj'] == '' and houses[i]['narodnost'] == '':
+        houses[i]['napoj'] = DRINKS[0] # Assign Caj
+        houses[i]['narodnost'] = NATIONALITIES[2] # Assign Dan
+        break
 
-#14 Nór býva vedľa modrého domu.
-for i in range(4):
-    if "Nor" in house[i]["narodnost"]:
-        house[i+1]["farba"] = [x for x in house[i+1]["farba"] if x != "modra"]
-    if "modra" in house[i]["farba"]:
-        house[i+1]["narodnost"] = [x for x in house[i+1]["narodnost"] if x != "Nor"]
+#14 Nemec fajčí Prince.
+for i in range(len(houses)): # Find house with no NATIONALITIES and CIGARS
+    if houses[i]['cigara'] == '' and houses[i]['narodnost'] == '':
+        houses[i]['cigara'] = CIGARS[4] # Assign Prince
+        houses[i]['narodnost'] = NATIONALITIES[4] # Assign Nemec
+        break
 
-#15 Osoba, ktorá fajčí Blend, má suseda, ktorý pije vodu.
-for i in range(4):
-    if "Blend" in house[i]["cigareta"]:
-        house[i+1]["napoj"] = [x for x in house[i+1]["napoj"] if x != "voda"]
-    if "voda" in house[i]["napoj"]:
-        house[i+1]["cigareta"] = [x for x in house[i+1]["cigareta"] if x != "Blend"]
+#15 Osoba, ktorá fajčí Pall Mall, má vtáka.
+for i in range(len(houses)):
+    if houses[i]['cigara'] == '': # Find remaining house with no Cigar
+        houses[i]['cigara'] = CIGARS[0] # Assign Pall Mall
+        houses[i]['zviera'] = PETS[1] # Assign Vtak
 
-for i in range(5):
-    if "ryba" not in house[i]["zviera"]:
-        print(house[i]["narodnost"])
+#16 Osoba, ktorá fajčí Blend, býva vedľa osoby, ktorá má mačku.
+for i, house in enumerate(houses):
+    if house['cigara'] != CIGARS[3]:
+        continue
 
+    if i == 0:
+        # If Nor lives in the first house, the second house is Modry
+        houses[i + 1]['zviera'] = PETS[2]
+        break
 
-for i in range(5):
-    print(house[i]["zviera"])
+    if i == 4:
+        # If Nor lives in the fifth house, the fourth house has Kon
+        houses[i - 1]['zviera'] = PETS[2]
+        break
+
+    if houses[i + 1]['zviera'] == '' and houses[i - 1]['zviera'] != '':
+        # If the house to the right is empty and the one to the left isn't, the right house is Modry
+        houses[i + 1]['zviera'] = PETS[2]
+        break
+
+    if houses[i + 1]['zviera'] != '' and houses[i - 1]['zviera'] == '':
+        # If the house to the right isn't empty and the one to the left is, the left house is Modry
+        houses[i - 1]['zviera'] = PETS[2]
+        break
+
+#17 Švéd má psa.
+for i in range(len(houses)):
+    if houses[i]['narodnost'] == '': # Find remaining house with no Nationality
+        houses[i]['narodnost'] = CIGARS[1] # Assign Sved
+        houses[i]['zviera'] = PETS[0] # Assign Pes
+        break
+
+# Solution
+for i in range(len(houses)):
+    if houses[i]['zviera'] == '':
+        print(houses[i]['narodnost'], "vlastni rybu")
