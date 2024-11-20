@@ -208,3 +208,4 @@ for i in range(len(houses)):
 for i in range(len(houses)):
     if houses[i]['zviera'] == '':
         print(houses[i]['narodnost'], "vlastni rybu")
+
