@@ -1,8 +1,8 @@
-colors = ['Cervena', 'Zelena', 'Biela', 'Zlta', 'Modra']
-nationalities = ['Brit', 'Sved', 'Dan', 'Nor', 'Nemec']
-drinks = ['Caj', 'Kava', 'Mlieko', 'Pivo', 'Voda']
+colors = ['Červená', 'Zelená', 'Biela', 'Žltá', 'Modrá']
+nationalities = ['Brit', 'Švéd', 'Dán', 'Nór', 'Nemec']
+drinks = ['Čaj', 'Káva', 'Mlieko', 'Pivo', 'Voda']
 cigars = ['Pall Mall', 'Dunhill', 'Blends', 'Blue Master', 'Prince']
-pets = ['Pes', 'Vtak', 'Macka', 'Kon', 'Ryba']
+pets = ['Pes', 'Vták', 'Mačka', 'Kôň', 'Ryba']
 
 houses = [None] * 5
 

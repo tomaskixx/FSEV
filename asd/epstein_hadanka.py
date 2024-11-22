@@ -1,19 +1,19 @@
 '''
 Brit žije v červenom dome.
-Švéd chová psy.
+Švéd má psa.
 Dán pije čaj.
-Zelený dom je hneď naľavo od bieleho.
-Obyvateľ zeleného domu pije kávu.
-Ten, kto fajčí cigarety Pall Mall, chová vtáky.
-Obyvateľ žltého domu fajčí cigarety Dunhill.
-Ten, kto žije v prostrednom dome, pije mlieko.
-Nór žije v prvom dome.
-Ten, kto fajčí cigarety Blends, žije vedľa chovateľa mačiek.
-Chovateľ koní žije vedľa toho, kto fajčí cigarety Dunhill.
-Ten, kto fajčí cigarety Blue Master, pije pivo.
-Nemec fajčí cigarety Prince.
-Nór žije vedľa modrého domu.
-Sused toho, kto fajčí cigarety Blends, pije vodu.
+Zelený dom je hneď vľavo vedľa bieleho domu.
+Majiteľ zeleného domu pije kávu.
+Osoba, ktorá fajčí Pall Mall, má vtáka.
+Majiteľ žltého domu fajčí Dunhill.
+Osoba žijúca v strednom dome pije mlieko.
+Nór býva v prvom dome.
+Osoba, ktorá fajčí Blend, býva vedľa osoby, ktorá má mačku.
+Osoba, ktorá má koňa, býva vedľa osoby, ktorá fajčí Dunhill.
+Osoba, ktorá fajčí Blue Master, pije pivo.
+Nemec fajčí Prince.
+Nór býva vedľa modrého domu.
+Osoba, ktorá fajčí Blend, má suseda, ktorý pije vodu.
 '''
 
 COLORS = ['Cervena', 'Zelena', 'Biela', 'Zlta', 'Modra']
