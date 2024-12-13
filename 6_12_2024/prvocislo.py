@@ -7,5 +7,7 @@ def is_prime(num):
                 return "Nieje prvocislo"
         else:
             return "Je prvocislo"
+        
+
 
 print(is_prime(9))
