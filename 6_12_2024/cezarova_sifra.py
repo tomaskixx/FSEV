@@ -15,4 +15,4 @@ def cipher(text, key):
 
     return result
 
-print(cipher("Pwdy", -15))
+print(cipher("Ahoj", 15))
